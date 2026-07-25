@@ -1,0 +1,85 @@
+{
+  "name": "deliverymanager",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:dev:fresh": "rimraf C:/DevData/DeliveryManagerData && cross-env DELIVERY_DATA_ROOT=C:/DevData/DeliveryManagerData concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.sundeepfreight.deliverymanager",
+    "productName": "DeliveryManager",
+    "electronVersion": "22.3.27",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "build/icon.ico",
+      "build/icon.png"
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**/*"
+    ],
+    "extraResources": [],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "warningsAsErrors": false
+    }
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "better-sqlite3": "^12.11.1",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
+    "lucide-react": "^1.17.0",
+    "papaparse": "^5.5.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.17.0",
+    "react-to-print": "^3.3.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.12.3",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^10.0.3",
+    "cross-env": "^10.1.0",
+    "electron": "^22.3.27",
+    "electron-builder": "^26.15.2",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "rimraf": "^6.1.3",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12",
+    "wait-on": "^9.0.10"
+  },
+  "allowScripts": {
+    "electron@22.3.27": true,
+    "core-js@3.49.0": true
+  }
+}
